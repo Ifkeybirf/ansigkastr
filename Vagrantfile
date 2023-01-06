@@ -76,4 +76,25 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+  config.vm.provision "shell" do |sh|
+  ssh_prv_key = ""
+  ssh_pub_key = ""
+  if File.file?("ttask_key")
+    ssh_prv_key = File.read("ttask_key")
+    ssh_pub_key = File.readlines("ttask_key.pub").first.strip
+  else
+    puts "No SSH key found."
+  end
+  sh.inline = <<-SHELL
+    if grep -sq "#{ssh_pub_key}" /home/vagrant/.ssh/authorized_keys; then
+      echo "SSH keys already provisioned."
+      exit 0;
+    fi
+    echo "SSH key provisioning."
+    mkdir -p /home/vagrant/.ssh/
+    touch /home/vagrant/.ssh/authorized_keys
+    echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+    chown -R vagrant:vagrant /home/vagrant
+    exit 0
+  SHELL
 end
