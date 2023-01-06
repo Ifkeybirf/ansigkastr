@@ -1,0 +1,12 @@
+- name: Test PING
+  hosts: ttaskL
+  become: yes
+  tasks:
+    - name: ping
+      ping:
+
+- name: Install docker
+  hosts: ttaskL
+  become: yes
+  roles: 
+    - 01dockerNode

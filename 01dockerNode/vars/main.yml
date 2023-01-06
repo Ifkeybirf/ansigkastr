@@ -1,0 +1,6 @@
+---
+# vars file for 01dockerNode
+DOMAIN_NAME: ubuntu2004.plut.ru
+locale1: en_US.UTF-8
+locale2: ru_RU.UTF-8
+time_zone: UTC

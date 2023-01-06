@@ -1,0 +1,15 @@
+- name: set time zone to UTC
+  shell:
+    cmd: "timedatectl set-timezone {{time_zone}}"
+
+- name: locale settings
+  shell:
+    cmd: 'locale-gen {{locale2}} && update-locale LANG={{locale1}} LANGUAGE={{locale1}} LC_TIME={{locale1}}'
+
+- name: hostname
+  shell:
+    cmd: 'hostnamectl set-hostname {{DOMAIN_NAME}}'
+
+- name: update packages index
+  shell:
+    cmd: 'apt update'

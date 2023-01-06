@@ -1,0 +1,7 @@
+---
+# tasks file for 01dockerNode
+
+# initial docker node configuration: TZ to UTC; generate RU locale, set default environment locale to EN
+- include_tasks: 01_initial_configuration.yaml
+# install docer.io and docker-compose packages
+- include_tasks: 02_install_docker.yaml
