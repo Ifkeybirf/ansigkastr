@@ -4,3 +4,10 @@ DOMAIN_NAME: ubuntu2004.plut.ru
 locale1: en_US.UTF-8
 locale2: ru_RU.UTF-8
 time_zone: UTC
+
+
+NODE_EXPORTER_URL_PROD: 'ttps://github.com/prometheus/node_exporter/releases/download/v1.5.0/'
+NODE_EXPORTER_URL_QA: 'http://ngordeev-viktim.srv.dev.solus.io/prom/'
+NODE_EXPORTER_FILE_NAME: 'node_exporter-1.5.0.linux-amd64'
+NODE_EXPORTER_FULL_URL: "{{NODE_EXPORTER_URL_QA ~ NODE_EXPORTER_FILE_NAME}}"
+#.tar.gz

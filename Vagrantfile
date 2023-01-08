@@ -97,4 +97,5 @@ Vagrant.configure("2") do |config|
     chown -R vagrant:vagrant /home/vagrant
     exit 0
   SHELL
+  end
 end

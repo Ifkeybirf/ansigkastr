@@ -1,0 +1,29 @@
+- name: download node_exporter for prometheus
+  get_url:
+    url: "{{NODE_EXPORTER_FULL_URL ~ '.tar.gz'}}"
+    dest: "/tmp"
+    mode: 0440
+    force: true
+    validate_certs: false
+
+- name: extract node_exporter from archive
+  shell:
+    cmd: 'cd /tmp && tar -xzf "{{NODE_EXPORTER_FILE_NAME}}".tar.gz'
+
+- name: copy node_exporter binary to /usr/sbin
+  ansible.builtin.copy:
+    backup: true
+    mode: preserve
+    remote_src: true
+    src: "{{ '/tmp/' ~ NODE_EXPORTER_FILE_NAME ~ '/node_exporter' }}"
+    dest: /usr/sbin/node_exporter
+
+- name: remove temporry node_exporter downloaded archive
+  ansible.builtin.file:
+    path: "{{ '/tmp/' ~ NODE_EXPORTER_FILE_NAME ~ '.tar.gz' }}"
+    state: absent
+
+- name: remove temporry node_exporter extracted binary
+  ansible.builtin.file:
+    path: "{{ '/tmp/' ~ NODE_EXPORTER_FILE_NAME }}"
+    state: absent
