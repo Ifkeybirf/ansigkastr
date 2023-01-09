@@ -1,0 +1,33 @@
+---
+# tasks file for 03dockerPrometheus
+
+- name: Create prometheus docker-related directory
+  file:
+    path=/docker/prometheus/prometheus
+    state=directory
+
+- name: Create prometheus docker-related data directory
+  file:
+    path=/docker/prometheus/prometheus_data
+    state=directory
+
+- name: copy prometheus docker file
+  copy: 
+    src=files/docker-compose-prometheus.yml
+    dest=/docker/prometheus/docker-compose-prometheus.yml
+
+- name: copy alerts rules config
+  copy:
+    src=prometheus/alert.rules
+    dest=/docker/prometheus/prometheus/alert.rules
+
+- name: copy prometheus config
+  copy:
+    src=files/prometheus/prometheus.yml
+    dest=/docker/prometheus/prometheus/prometheus.yml
+
+- name: deploy Docker Compose stack
+  community.docker.docker_compose:
+    project_src: /docker/prometheus
+    files:
+    - docker-compose-prometheus.yml
