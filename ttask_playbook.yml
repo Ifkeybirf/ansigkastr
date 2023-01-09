@@ -22,3 +22,10 @@
   become: yes
   roles:
     - 02install_node_exporter
+
+- name: Install prometheus
+  hosts: ttaskL
+  become: yes
+  roles:
+    - 03dockerPrometheus
+
