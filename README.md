@@ -2,9 +2,13 @@
 
 ## Preparation
 - obtain Linux host machine (I'd prefer Debian 11)
+- install ansible (version 2.10.8 available out of the box from system repo)
+```sh
+   apt install -y ansible
+```
 - install vagrant with command
  ```sh
-    apt install vagrant (2.2.14 available from system repo out of the box)
+    apt install -y vagrant (2.2.14 available from system repo out of the box)
  ```
 - install Virtualbox 6.1 from official site virtualbox.org (latest vagrant from system repo does not work with virtualbox > 6.1)
 
@@ -12,7 +16,7 @@
 due to sanctions vagrant box automatic installation does not available by default in RU, so
 
 - we need to have download box image from the https://app.vagrantup.com/generic/boxes/ubuntu2004 for appropriate virtualization backend
-and import it manually with command below
+and import it manually with command like below
 ```sh
 vagrant box add full_path_to_downloaded_skeleton --name _image_name_ (image_name = "generic/ubuntu2004" based on tech spec in our case)
 ```
@@ -21,6 +25,6 @@ vagrant box add full_path_to_downloaded_skeleton --name _image_name_ (image_name
 ```sh
 vagrant plugin install vagrant-disksize
 ```
-Vagrant:16 line can be uncommented in case it is installed
+Vagrant:17 line can be uncommented in case it is installed
 
 

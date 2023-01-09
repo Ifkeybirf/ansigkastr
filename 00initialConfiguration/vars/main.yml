@@ -1,0 +1,7 @@
+---
+# vars file for 00initialConfiguration
+
+DOMAIN_NAME: ubuntu2004.plut.ru
+locale1: en_US.UTF-8
+locale2: ru_RU.UTF-8
+time_zone: UTC

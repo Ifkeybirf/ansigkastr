@@ -1,0 +1,5 @@
+---
+# tasks file for 00initialConfiguration
+
+# initial docker node configuration: TZ to UTC; generate RU locale, set default environment locale to EN
+- include_tasks: initial_configuration.yaml

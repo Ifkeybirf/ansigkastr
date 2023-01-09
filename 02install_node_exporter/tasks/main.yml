@@ -1,0 +1,5 @@
+---
+# tasks file for 02install_node_exporter
+
+# install node_exporter for prometheus
+- include_tasks: install_node_exporter_prometheus.yaml

@@ -5,8 +5,20 @@
     - name: ping
       ping:
 
+- name: Initial VM configuration
+  hosts: ttaskL
+  become: yes
+  roles:
+    - 00initialConfiguration
+
 - name: Install docker
   hosts: ttaskL
   become: yes
-  roles: 
+  roles:
     - 01dockerNode
+
+- name: Install node_exporter for prometheus
+  hosts: ttaskL
+  become: yes
+  roles:
+    - 02install_node_exporter
