@@ -1,0 +1,13 @@
+## special ansible module for manage packages is preferred to use
+
+- name: install docker-compose
+  apt:
+    name: docker-compose
+    state: present
+    update_cache: yes
+
+- name: install docker.io
+  apt:
+    name: docker.io
+    state: present
+    update_cache: yes

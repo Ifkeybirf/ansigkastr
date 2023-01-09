@@ -1,0 +1,11 @@
+- name: set time zone to UTC
+  community.general.timezone:
+    name: "{{time_zone}}"
+
+- name: locale settings
+  shell:
+    cmd: 'locale-gen {{locale2}} && update-locale LANG={{locale1}} LANGUAGE={{locale1}} LC_TIME={{locale1}}'
+
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{DOMAIN_NAME}}"

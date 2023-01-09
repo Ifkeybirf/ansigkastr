@@ -1,0 +1,9 @@
+- name: Install node_exporter to the system
+  ansible.builtin.unarchive:
+    src: "{{NODE_EXPORTER_FULL_URL ~ '.tar.gz'}}"
+    dest: '/usr/sbin'
+    exclude: [LICENSE, NOTICE]
+# option below may help not ot use exclude, but it is available since ansible >= 2.11 only
+#    include: [node_exporter]
+    extra_opts: '--strip-components=1'
+    remote_src: true

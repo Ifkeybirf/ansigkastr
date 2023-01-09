@@ -1,0 +1,5 @@
+---
+# tasks file for 01dockerNode
+
+# install docer.io and docker-compose packages
+- include_tasks: install_docker.yaml
