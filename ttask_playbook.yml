@@ -23,9 +23,15 @@
   roles:
     - 02install_node_exporter
 
-- name: Install prometheus
+- name: Setup prometheus container
   hosts: ttaskL
   become: yes
   roles:
     - 03dockerPrometheus
+
+- name: Setup grafana container
+  hosts: ttaskL
+  become: yes
+  roles:
+    - 04dockerGrafana
 

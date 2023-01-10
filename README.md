@@ -28,3 +28,16 @@ vagrant plugin install vagrant-disksize
 Vagrant:17 line can be uncommented in case it is installed
 
 
+
+you probably need to install ansible modules that are not installed in your system by default:
+```sh
+ansible-galaxy collection install -r requirements.yml
+```
+
+there is already generated inventory file, but in case hosts.txt was modified
+you have to execute inventory re-generation command:
+```sh
+ansible-inventory -i hosts.txt --list --yaml --export --output=inventory
+```
+
+
