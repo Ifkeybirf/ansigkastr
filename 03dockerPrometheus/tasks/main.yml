@@ -5,14 +5,16 @@
   file:
     path=/docker/prometheus/prometheus
     state=directory
+    mode=777
 
 - name: Create prometheus docker-related data directory
   file:
     path=/docker/prometheus/prometheus_data
     state=directory
+    mode=777
 
 - name: copy prometheus docker file
-  copy: 
+  copy:
     src=files/docker-compose-prometheus.yml
     dest=/docker/prometheus/docker-compose-prometheus.yml
 

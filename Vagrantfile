@@ -98,4 +98,11 @@ Vagrant.configure("2") do |config|
     exit 0
   SHELL
   end
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.inventory_path = "./inventory"
+    ansible.playbook = "ttask_playbook.yml"
+    ansible.limit = "ttaskL"
+  end
+
 end
