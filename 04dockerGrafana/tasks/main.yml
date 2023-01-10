@@ -1,0 +1,70 @@
+---
+# tasks file for 04dockerGrafana
+
+- name: Create grafana docker-related directory
+  file:
+    path=/docker/grafana/grafana
+    state=directory
+    mode=777
+
+- name: Create grafana docker-related directory
+  file:
+    path=/docker/grafana/grafana/provisioning/dashboards
+    state=directory
+
+- name: Create grafana docker-related data directory
+  file:
+    path=/docker/grafana/grafana_data
+    state=directory
+    mode=777
+
+- name: copy grafana docker file
+  copy:
+    src=files/docker-compose-grafana.yml
+    dest=/docker/grafana/docker-compose-grafana.yml
+
+- name: copy dashboard config
+  copy:
+    src=files/grafana/provisioning/dashboards/dashboard.yml
+    dest=/docker/grafana/grafana/provisioning/dashboards/dashboard.yml
+
+- name: copy containers dashboard config
+  copy:
+    src=files/grafana/provisioning/dashboards/docker_containers.json
+    dest=/docker/grafana/grafana/provisioning/dashboards/docker_containers.json
+
+- name: copy docker_host dashboard config
+  copy:
+    src=files/grafana/provisioning/dashboards/docker_host.json
+    dest=/docker/grafana/grafana/provisioning/dashboards/docker_host.json
+
+- name: copy monitor_services dashboard config
+  copy:
+    src=files/grafana/provisioning/dashboards/monitor_services.json
+    dest=/docker/grafana/grafana/provisioning/dashboards/monitor_services.json
+
+- name: copy nginx_container dashboard config
+  copy:
+    src=files/grafana/provisioning/dashboards/nginx_container.json
+    dest=/docker/grafana/grafana/provisioning/dashboards/nginx_container.json
+
+- name: Create grafana docker-related directory
+  file:
+    path=/docker/grafana/grafana/provisioning/datasources
+    state=directory
+
+- name: copy datasources config
+  copy:
+    src=files/grafana/provisioning/datasources/datasource.yml
+    dest=/docker/grafana/grafana/provisioning/datasources/datasource.yml
+
+- name: copy monitoring config
+  copy:
+    src=files/config.monitoring
+    dest=/docker/grafana/config.monitoring
+
+- name: deploy Docker Grafana container
+  community.docker.docker_compose:
+    project_src: /docker/grafana
+    files:
+    - docker-compose-grafana.yml
