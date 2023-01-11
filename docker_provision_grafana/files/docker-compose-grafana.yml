@@ -16,3 +16,12 @@ services:
     env_file:
       - ./config.monitoring
     restart: unless-stopped
+
+    networks:
+      - default
+      - prome_graf
+
+networks:
+  prome_graf:
+    external:
+      name:  prome_graf_net
