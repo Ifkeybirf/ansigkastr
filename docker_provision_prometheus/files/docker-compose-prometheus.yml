@@ -1,6 +1,7 @@
 version: '3.7'
 
 volumes:
+    prometheus: {}
     prometheus_data: {}
 
 services:
