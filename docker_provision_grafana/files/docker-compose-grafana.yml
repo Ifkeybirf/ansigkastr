@@ -1,6 +1,7 @@
 version: '3.7'
 
 volumes:
+    grafana: {}
     grafana_data: {}
 
 services:
@@ -12,7 +13,8 @@ services:
       - 3000:3000
     volumes:
       - ./grafana_data:/var/lib/grafana
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - ./grafana/:/etc/grafana/
+      - ./grafana_logs/:/var/log/grafana/
     env_file:
       - ./config.monitoring
     restart: unless-stopped

@@ -8,8 +8,10 @@
 ```
 - install vagrant with command
  ```sh
-    apt install -y vagrant (2.2.14 available from system repo out of the box)
+    apt install -y vagrant
  ```
+ (2.2.14 available from system repo out of the box)
+ 
 - install Virtualbox 6.1 from official site virtualbox.org (latest vagrant from system repo does not work with virtualbox > 6.1)
 
 
@@ -18,8 +20,10 @@ due to sanctions vagrant box automatic installation does not available by defaul
 - we need to have download box image from the https://app.vagrantup.com/generic/boxes/ubuntu2004 for appropriate virtualization backend
 and import it manually with command like below
 ```sh
-vagrant box add full_path_to_downloaded_skeleton --name _image_name_ (image_name = "generic/ubuntu2004" based on tech spec in our case)
+vagrant box add full_path_to_downloaded_skeleton --name _image_name_
 ```
+image_name = "generic/ubuntu2004" based on tech spec in our case
+
 
 - to change default box disk size plugin vagrant-disksize need to be installed (but it is not mandatory):
 ```sh
@@ -39,5 +43,3 @@ you have to execute inventory re-generation command:
 ```sh
 ansible-inventory -i hosts.txt --list --yaml --export --output=inventory
 ```
-
-
