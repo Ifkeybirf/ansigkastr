@@ -9,29 +9,28 @@
   hosts: ttaskL
   become: yes
   roles:
-    - 00initialConfiguration
+    - initial_configuration
 
-- name: Install docker
+- name: Install docker packages
   hosts: ttaskL
   become: yes
   roles:
-    - 01dockerNode
+    - docker_node_setup
+
+- name: Provision prometheus container
+  hosts: ttaskL
+  become: yes
+  roles:
+    - docker_provision_prometheus
+
+- name: Provision grafana container
+  hosts: ttaskL
+  become: yes
+  roles:
+    - docker_provision_grafana
 
 - name: Install node_exporter for prometheus
   hosts: ttaskL
   become: yes
   roles:
-    - 02install_node_exporter
-
-- name: Setup prometheus container
-  hosts: ttaskL
-  become: yes
-  roles:
-    - 03dockerPrometheus
-
-- name: Setup grafana container
-  hosts: ttaskL
-  become: yes
-  roles:
-    - 04dockerGrafana
-
+    - install_node_exporter

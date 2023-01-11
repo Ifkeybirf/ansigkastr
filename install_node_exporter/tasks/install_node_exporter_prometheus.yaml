@@ -1,0 +1,47 @@
+---
+- name: create system user and group
+  ansible.builtin.user:
+    name=node_exporter
+    create_home=false
+    system=true
+    shell=/usr/bin/false
+
+- name: Install node_exporter to the system
+  ansible.builtin.unarchive:
+    src: "{{ NODE_EXPORTER_FULL_URL ~ '.tar.gz' }}"
+    dest: '/usr/bin'
+    exclude: [LICENSE, NOTICE]
+# option below may help not ot use exclude, but it is available since ansible >= 2.11 only
+#    include: [node_exporter]
+    extra_opts: '--strip-components=1'
+    remote_src: true
+
+- name: change owner for binary
+  file:
+    path=/usr/bin/node_exporter
+    owner=node_exporter
+    group=node_exporter
+    mode=555
+
+- name: create configs directory
+  file:
+    path=/etc/node_exporter
+    state=directory
+    group=node_exporter
+    mode=755
+
+- name: copy config for node_exporter service
+  copy:
+    src=files/node_exporter.service
+    dest=/usr/lib/systemd/system/node_exporter.service
+    mode=644
+
+- name: force systemd to reread configs
+  ansible.builtin.systemd:
+    daemon_reload: yes
+
+- name: start node_exporter service
+  ansible.builtin.service:
+    name: node_exporter
+    state: started
+    enabled: yes
