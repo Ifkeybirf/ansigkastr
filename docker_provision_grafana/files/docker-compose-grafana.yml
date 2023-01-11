@@ -3,6 +3,7 @@ version: '3.7'
 volumes:
     grafana: {}
     grafana_data: {}
+    grafana_logs: {}
 
 services:
 
@@ -15,8 +16,14 @@ services:
       - ./grafana_data:/var/lib/grafana
       - ./grafana/:/etc/grafana/
       - ./grafana_logs/:/var/log/grafana/
-    env_file:
-      - ./config.monitoring
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/1860.json
+      - GF_SECURITY_ADMIN_PASSWORD=123qwe
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - DS_PROMETHEUS=prometheus
+#    env_file:
+#      - ./config.monitoring
     restart: unless-stopped
 
     networks:
