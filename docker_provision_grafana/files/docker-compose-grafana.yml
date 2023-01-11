@@ -8,7 +8,9 @@ volumes:
 services:
 
   grafana:
-    image: grafana/grafana:9.3.2
+#    image: grafana/grafana:9.3.2
+    image: grafana/grafana:9.3.2-ubuntu
+#    image: grafana/grafana:9.1.8-ubuntu
     container_name: grafana
     ports:
       - 3000:3000
@@ -19,9 +21,10 @@ services:
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/1860.json
+#      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/1860.json
       - GF_SECURITY_ADMIN_PASSWORD=123qwe
       - GF_USERS_ALLOW_SIGN_UP=false
-      - DS_PROMETHEUS=prometheus
+      - DS_PROMETHEUS=Prometheus
 #    env_file:
 #      - ./config.monitoring
     restart: unless-stopped

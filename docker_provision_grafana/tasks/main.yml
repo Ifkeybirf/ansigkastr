@@ -28,6 +28,20 @@
   copy:
     src=files/grafana/provisioning/datasources/datasource.yml
     dest=/docker/grafana/grafana/provisioning/datasources/datasource.yml
+    mode=666
+
+#- name: create prometheus datasource
+#  community.grafana.grafana_datasource:
+#    name: Prometheus
+#    org_id: 1
+#    is_default: true
+#    ds_type: "prometheus"
+#    ds_url: http://prometheus:9090
+#    url: http://prometheus:9090
+#    access: proxy
+#    tls_skip_verify: true
+#    state: present
+    
 
 - name: 'Create grafana docker-related data directory: etc/grafana/provisioning/dashboards'
   file:
@@ -35,6 +49,11 @@
     state=directory
     mode=777
 
+#- name: put grafana dashboard 1860 config
+#  copy:
+#    src=files/grafana/provisioning/dashboards/1860.json
+#    dest=/docker/grafana/grafana/provisioning/dashboards/1860.json
+    
 - name: 'Create grafana docker-related data directory: grafana_data aka lib/grafana'
   file:
     path=/docker/grafana/grafana_data
@@ -51,6 +70,21 @@
   copy:
     src=files/grafana/provisioning/dashboards/1860.json
     dest=/docker/grafana/grafana_data/dashboards/1860.json
+    mode=777
+
+#- name: Import Grafana dashboard foo
+#  community.grafana.grafana_dashboard:
+#    grafana_url: http://grafana:3000
+#    url_username: admin
+#    url_password: 123qwe
+#    state: present
+#    commit_message: Updated by ansible
+#    overwrite: yes
+#    org_id: 1    
+##    path: /var/lib/grafana/dashboards/1860.json
+#    dashboard_id: 1860
+
+
 
 #- name: copy monitoring config
 #  copy:
