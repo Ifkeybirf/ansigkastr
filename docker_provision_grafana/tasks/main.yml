@@ -1,20 +1,65 @@
 ---
-# tasks file for 04dockerGrafana
+# tasks file for docker_provision_grafana
 
-- name: Create grafana docker-related directory
+# name: 'Create grafana docker-related directory: grafana'
+# file:
+#   path=/docker/grafana
+#   state=directory
+#   mode=755
+
+- name: 'Create grafana docker-related directory: grafana'
   file:
     path=/docker/grafana/grafana
     state=directory
     mode=777
 
-- name: Create grafana docker-related directory
+- name: copy grafana.ini
+  copy:
+    src=files/grafana/grafana.ini
+    dest=/docker/grafana/grafana/grafana.ini
+    
+- name: 'Create grafana docker-related data directory: etc/grafana/provisioning/datasources'
+  file:
+    path=/docker/grafana/grafana/provisioning/datasources
+    state=directory
+    mode=777
+    
+- name: copy grafana datasource config
+  copy:
+    src=files/grafana/provisioning/datasources/datasource.yml
+    dest=/docker/grafana/grafana/provisioning/datasources/datasource.yml
+
+- name: 'Create grafana docker-related data directory: etc/grafana/provisioning/dashboards'
   file:
     path=/docker/grafana/grafana/provisioning/dashboards
     state=directory
+    mode=777
 
-- name: Create grafana docker-related data directory
+- name: 'Create grafana docker-related data directory: grafana_data aka lib/grafana'
   file:
     path=/docker/grafana/grafana_data
+    state=directory
+    mode=777
+
+- name: 'Create grafana docker-related data directory: grafana_data/dashboards'
+  file:
+    path=/docker/grafana/grafana_data/dashboards
+    state=directory
+    mode=777
+
+- name: put grafana dashboard 1860 config
+  copy:
+    src=files/grafana/provisioning/dashboards/1860.json
+    dest=/docker/grafana/grafana_data/dashboards/1860.json
+
+#- name: copy monitoring config
+#  copy:
+#    src=files/config.monitoring
+#    dest=/docker/grafana/config.monitoring
+
+- name: 'Create grafana docker-related data directory: grafana_logs aka var/logs'
+  file:
+    path=/docker/grafana/grafana_logs
     state=directory
     mode=777
 
@@ -22,46 +67,6 @@
   copy:
     src=files/docker-compose-grafana.yml
     dest=/docker/grafana/docker-compose-grafana.yml
-
-- name: copy dashboard config
-  copy:
-    src=files/grafana/provisioning/dashboards/dashboard.yml
-    dest=/docker/grafana/grafana/provisioning/dashboards/dashboard.yml
-
-- name: copy containers dashboard config
-  copy:
-    src=files/grafana/provisioning/dashboards/docker_containers.json
-    dest=/docker/grafana/grafana/provisioning/dashboards/docker_containers.json
-
-- name: copy docker_host dashboard config
-  copy:
-    src=files/grafana/provisioning/dashboards/docker_host.json
-    dest=/docker/grafana/grafana/provisioning/dashboards/docker_host.json
-
-- name: copy monitor_services dashboard config
-  copy:
-    src=files/grafana/provisioning/dashboards/monitor_services.json
-    dest=/docker/grafana/grafana/provisioning/dashboards/monitor_services.json
-
-- name: copy nginx_container dashboard config
-  copy:
-    src=files/grafana/provisioning/dashboards/nginx_container.json
-    dest=/docker/grafana/grafana/provisioning/dashboards/nginx_container.json
-
-- name: Create grafana docker-related directory
-  file:
-    path=/docker/grafana/grafana/provisioning/datasources
-    state=directory
-
-- name: copy datasources config
-  copy:
-    src=files/grafana/provisioning/datasources/datasource.yml
-    dest=/docker/grafana/grafana/provisioning/datasources/datasource.yml
-
-- name: copy monitoring config
-  copy:
-    src=files/config.monitoring
-    dest=/docker/grafana/config.monitoring
 
 - name: deploy Docker Grafana container
   community.docker.docker_compose:

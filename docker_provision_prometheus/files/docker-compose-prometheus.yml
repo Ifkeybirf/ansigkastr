@@ -1,6 +1,7 @@
 version: '3.7'
 
 volumes:
+    prometheus: {}
     prometheus_data: {}
 
 services:
@@ -18,4 +19,11 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
     ports:
       - 9090:9090
+
     restart: unless-stopped
+    networks:
+      - default
+
+networks:
+  default:
+    name: prome_graf_net
