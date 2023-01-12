@@ -58,6 +58,7 @@ after VM provisioned there are 2 docker containers executed inside: with Prometh
 
 
 ## Known Problems / Issues / Limitations
+
 - VM Ubuntu 20.04.5 uses NAT network and ansible connects to localhost. So there may be varning that `REMOTE HOST IDENTIFICATION HAS CHANGED`.
 in this case you have to remove localhost record(s) from your ~/.ssh/known_hosts file.
 can be avoided by change ansible config in a way below:
@@ -82,13 +83,4 @@ but I was out of time by making it work in general, so i did not make it beauty.
 -- it is not compatible with fresh Grafana versions
 -- it looks like does not work with dockered Grafana (but i did not investigate it deeply)
 
-- General problem that I was not able to make this dashboard work in general (mean draw graphics) 🤔
-I see that 
--- node_exporter collects data from VM node (it can be seen by opening http://localhost:9100)
--- Prometheus is able to fetch data from node_exporter (http://localhost:9090)
--- Grafana is able to use Prometheus as default data source
--- Dashboards from Prometheus can be imported to grafana (checked through UI), and they show some data
-but [Dashboard #1860](https://grafana.com/grafana/dashboards/1860) does not show any collected data.
-I did not found why.
-I've tried to install Grafana right inside VM from .deb package and import dashboard by it's # through Web UI - but it does not work that way either
 
