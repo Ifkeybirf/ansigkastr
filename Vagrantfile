@@ -30,8 +30,6 @@ Vagrant.configure("2") do |config|
   # port mapping above not needed as it already added to the box by default
   config.vm.network "forwarded_port", guest: 22, host: 20422
   config.vm.network "forwarded_port", guest: 3000, host: 3000
-  config.vm.network "forwarded_port", guest: 9090, host: 9090
-  config.vm.network "forwarded_port", guest: 9100, host: 9100
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -106,7 +104,6 @@ Vagrant.configure("2") do |config|
     ansible.inventory_path = "./inventory"
     ansible.playbook = "ttask_playbook.yml"
     ansible.limit = "ttaskL"
-#    ansible.verbose = "v"
   end
 
 end
