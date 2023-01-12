@@ -35,6 +35,11 @@
     state=directory
     mode=777
 
+- name: 'copy grafana main dashboard declaration'
+  copy:
+    src=files/grafana/provisioning/dashboards/main.yml
+    dest=/docker/grafana/grafana/provisioning/dashboards/main.yml
+
 - name: 'Create grafana docker-related data directory: grafana_data aka lib/grafana'
   file:
     path=/docker/grafana/grafana_data
