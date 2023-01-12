@@ -13,5 +13,3 @@ datasources:
     basicAuth: false
     isDefault: true
     editable: true
-#    jsonData:
-#      httpMethod: GET
